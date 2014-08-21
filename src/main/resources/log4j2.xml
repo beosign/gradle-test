@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Log4j2 is not on the classpath, only log4j 1.2, so this file will not 
+	be considered! -->
+<configuration status="INFO">
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{dd.MM.yyyy HH:mm:ss.SSS} %-5level [%C{1}::%M] %msg%n" />
+		</Console>
+		<RollingFile name="File" fileName="gradle-test.log"
+			filePattern="gradle-test-%i.log">
+			<PatternLayout>
+				<Pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} %-5level [%C{1}::%M] %msg%n
+				</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="5 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingFile>
+	</appenders>
+	<loggers>
+		<root level="debug">
+			<appender-ref ref="Console" />
+			<appender-ref ref="File" />
+		</root>
+		<Logger name="de.beosign.test.gradle" level="trace">
+			<AppenderRef ref="File" />
+		</Logger>
+	</loggers>
+</configuration>
